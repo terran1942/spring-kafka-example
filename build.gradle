@@ -1,0 +1,39 @@
+plugins {
+  id 'org.springframework.boot' version '2.2.6.RELEASE'
+  id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+  id 'java'
+}
+
+group = 'io.kronstadt.lab'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+  compileOnly {
+    extendsFrom annotationProcessor
+  }
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  implementation 'org.springframework.boot:spring-boot-starter-webflux'
+  implementation 'org.springframework.kafka:spring-kafka'
+  compileOnly 'org.projectlombok:lombok'
+  annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+  annotationProcessor 'org.projectlombok:lombok'
+  testImplementation('org.springframework.boot:spring-boot-starter-test') {
+    exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+  }
+  testImplementation 'io.projectreactor:reactor-test'
+  testImplementation 'org.springframework.kafka:spring-kafka-test'
+
+  compile group: 'com.google.protobuf', name: 'protobuf-java', version: '3.11.4'
+//  compile group: 'io.projectreactor.kafka', name: 'reactor-kafka', version: '1.2.2.RELEASE'
+}
+
+test {
+  useJUnitPlatform()
+}
